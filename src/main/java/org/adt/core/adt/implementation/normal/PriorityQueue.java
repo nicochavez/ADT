@@ -22,6 +22,21 @@ public class PriorityQueue implements IPriorityQueue {
 
     @Override
     public void add(int a, int priority) {
+        int j = this.count;
+        while (j > 0 && this.priorities[j-1] > priority) {
+            this.array[j] = this.array[j-1];
+            this.priorities[j] = this.priorities[j-1];
+            j--;
+        }
+        this.array[j] = a;
+        this.priorities[j] = priority;
+        count++;
+    }
+
+    // Solo para prioridades no repetidas
+    /*
+         @Override
+    public void add(int a, int priority) {
         int index = binarySearch(priority);
 
         for (int i = this.count; i > index; i--) {
@@ -35,7 +50,6 @@ public class PriorityQueue implements IPriorityQueue {
         this.count++;
     }
 
-    // Solo para prioridades no repetidas, sino debe utilizarse otra tecnica
     private int binarySearch(int priority) {
         int low = 0;
         int high = this.count - 1;
@@ -53,7 +67,7 @@ public class PriorityQueue implements IPriorityQueue {
 
         return low;
     }
-
+     */
     @Override
     public void remove() {
         if (count == 0) {

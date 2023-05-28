@@ -29,4 +29,10 @@ public interface ISet {
      */
     int choose();
 
+    /**
+     * 
+     * @param a
+     * @return <code>true</code> si el elemento a pertenece al conjunto.
+     */
+
 }

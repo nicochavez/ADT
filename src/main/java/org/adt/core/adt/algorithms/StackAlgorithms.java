@@ -5,14 +5,14 @@ import org.adt.core.adt.implementation.normal.Stack;
 
 public class StackAlgorithms {
 
-    public static void print(IStack stack) {
+    public static void print(IStack stack) { //Imprime la pila
         while (!stack.isEmpty()) {
             System.out.println(stack.getTop());
             stack.remove();
         }
     }
 
-    public static IStack copy(IStack stack) {
+    public static IStack copy(IStack stack) {  //Copia la pila
         IStack copy = new Stack();
         IStack aux = new Stack();
         while (!stack.isEmpty()) {
@@ -27,7 +27,7 @@ public class StackAlgorithms {
         return copy;
     }
 
-    public static void revert(IStack stack) {
+    public static void revert(IStack stack) { //Invierte la pila
         IStack aux = new Stack();
         IStack aux2 = new Stack();
         while (!stack.isEmpty()) {
