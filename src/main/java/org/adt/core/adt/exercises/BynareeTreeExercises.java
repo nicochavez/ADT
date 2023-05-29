@@ -18,6 +18,7 @@ public class BynareeTreeExercises {
         queue.add(binaryTree.getValue());
         binaryTreeToQueue(binaryTree.getRight(), queue);
     }
+    
 
 
 

@@ -170,7 +170,7 @@ public class BinaryTreeAlgorithms {
                 isSBT(binaryTree.getRight());
     }
 
-    public static boolean swap(IBinaryTree binaryTree, int value) {
+    public static boolean swap(IBinaryTree binaryTree, int value) { //busca un nodo con un valor dado y realiza el intercambio de sus nodos hijos (El der por el izq, el izq por el der)
         if (binaryTree == null || binaryTree.isEmpty()) {
             return false;
         }
@@ -190,7 +190,7 @@ public class BinaryTreeAlgorithms {
         return swap(binaryTree.getLeft(), value) || swap(binaryTree.getRight(), value);
     }
 
-    public static void copy(IBinaryTree binaryTree, IBinaryTree binaryTree2) {
+    public static void copy(IBinaryTree binaryTree, IBinaryTree binaryTree2) { //copia el contenido del segundo árbol en el primer árbol, manteniendo la estructura de árbol binario.
         if (binaryTree2 == null || binaryTree2.isEmpty() || binaryTree2.getValue() == -1) {
             return;
         }

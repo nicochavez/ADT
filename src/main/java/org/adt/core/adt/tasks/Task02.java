@@ -33,11 +33,12 @@ public class Task02 {
         if (binaryTree == null || binaryTree.isEmpty()) {
             return;
         }
-        BinaryTreeAlgorithms.inOrder(binaryTree.getLeft());
-        BinaryTreeAlgorithms.inOrder(binaryTree.getRight());
         if (binaryTree.getLeft() == null && binaryTree.getRight() == null) {
             leafs.add(binaryTree.getValue());
         }
+        getLeafsmin(binaryTree.getLeft(), leafs);
+        getLeafsmin(binaryTree.getRight(), leafs);
+
     }
 
     public static int getMinValue (int [] leafs){
@@ -51,22 +52,67 @@ public class Task02 {
 
     }
 
+    public static IBinaryTree convertToBST(IBinaryTree binaryTree) {
+        if (binaryTree == null || binaryTree.isEmpty()) {
+            return null;
+        }
+    
+        List<Integer> values = new ArrayList<>();
+        inOrderTraversal(binaryTree, values); // Realiza un recorrido en orden para obtener los valores ordenados
+        Collections.sort(values);
+        /*
+        for(Integer e : values){
+            System.out.println(e);
+        }
+        System.out.println("---");
+         */
+
+        return buildBST (values, 0, values.size() - 1);
+    }
+    
+    private static void inOrderTraversal(IBinaryTree binaryTree, List<Integer> values) {
+        if (binaryTree == null || binaryTree.isEmpty()) {
+            return;
+        }
+    
+        inOrderTraversal(binaryTree.getLeft(), values);
+        System.out.println(binaryTree.getValue());
+        values.add(binaryTree.getValue());
+        inOrderTraversal(binaryTree.getRight(), values);
+    }
+    
+    public IBinaryTree buildBST(List<Integer> values, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        
+        int mid = start + (end - start) / 2;
+        IBinaryTree root = new BinaryTree();
+        root.create(values.get(mid));
+        root.addLeft(buildBST(values, start, mid - 1).getValue());
+        root.addRight(buildBST(values, mid + 1, end).getValue());
+        
+        return root;
+    }
+    
+
     public static void main(String[] args){
-        BinaryTree binaryTree = new BinaryTree();
+        IBinaryTree binaryTree = new BinaryTree();
         binaryTree.create(1);
         binaryTree.addLeft(2);
         binaryTree.addRight(3);
         binaryTree.getLeft().addLeft(4);
+        binaryTree.getLeft().addRight(6);
         binaryTree.getRight().addRight(5);
-
-
+        binaryTree.getRight().addLeft(7);
+                
         List<Integer> leafs = new ArrayList<>();
         getLeafsmin(binaryTree, leafs);
         int[] arrayLeafs = leafs.stream().mapToInt(Integer::intValue).toArray();
-        System.out.println(internalNodesSum(binaryTree)*getMinValue(arrayLeafs));
-
-
-
+        //System.out.println(internalNodesSum(binaryTree)*getMinValue(arrayLeafs));
+        IBinaryTree SBT = convertToBST(binaryTree);
+        System.out.println("---");
+        BinaryTreeAlgorithms.inOrder(SBT);
     }
 
 }
