@@ -72,37 +72,37 @@ public class BinaryTreeAlgorithms {
         return candidate;
     }
 
-    public static boolean skewed(IBinaryTree binaryTree) { //
+    public static boolean skewed(IBinaryTree binaryTree) { //Devuelve True si el arbol esta sesgado hacia la derecha o a la izquierda.
         return leftSkewed(binaryTree) || rightSkewed(binaryTree);
     }
 
-    public static boolean leftSkewed(IBinaryTree binaryTree) {
+    public static boolean leftSkewed(IBinaryTree binaryTree) { //Devuelve True si el arbol esta sesgado a la izquierda, es decir no tiene nodos derechos.
         if (binaryTree == null || binaryTree.isEmpty()) {
             return true;
         }
         return binaryTree.getRight() == null && leftSkewed(binaryTree);
     }
 
-    public static boolean rightSkewed(IBinaryTree binaryTree) {
+    public static boolean rightSkewed(IBinaryTree binaryTree) { //Devuelve True si el arbol esta sesgado a la derecha, es decir no tiene nodos izquierdos.
         if (binaryTree == null || binaryTree.isEmpty()) {
             return true;
         }
         return binaryTree.getLeft() == null && rightSkewed(binaryTree);
     }
 
-    public static boolean degenerate(IBinaryTree binaryTree) {
-        if (binaryTree == null || binaryTree.isEmpty()) {
+    public static boolean degenerate(IBinaryTree binaryTree) {// Devuelve True si el arbol binario es degenerado, es decir, que cada nodo tiene un solo hijo.
+        if (binaryTree == null || binaryTree.isEmpty()) { //Comprueba si el arbol esta vacio
             return true;
         }
 
-        if (binaryTree.getLeft() != null) {
-            if (binaryTree.getRight() != null) {
+        if (binaryTree.getLeft() != null) { //Compruea si tiene un hijo izquierdo
+            if (binaryTree.getRight() != null) { //Si tien un hijo derecho tambien retorna falso
                 return false;
             }
             return degenerate(binaryTree.getLeft());
         }
 
-        if (binaryTree.getRight() != null) {
+        if (binaryTree.getRight() != null) { //lo mismo aca
             if (binaryTree.getLeft() != null) {
                 return false;
             }
@@ -112,7 +112,7 @@ public class BinaryTreeAlgorithms {
         return true;
     }
 
-    public static boolean complete(IBinaryTree binaryTree) {
+    public static boolean complete(IBinaryTree binaryTree) { // Devuelve True si el arbol binario esta completo, es decir que siempre tiene un nodo izquierdo y derecho o no tiene ningun nodo.
         if (binaryTree == null || binaryTree.isEmpty()) {
             return true;
         }
@@ -120,11 +120,11 @@ public class BinaryTreeAlgorithms {
         return binaryTree.getLeft() != null &&
                 binaryTree.getRight() != null &&
                 complete(binaryTree.getLeft()) &&
-                complete(binaryTree.getRight()) ||
-                binaryTree.getLeft() == null && binaryTree.getRight() == null;
+                complete(binaryTree.getRight()) ||// Si el nodo tiene hijo izquierdo y dercho exclusivo
+                binaryTree.getLeft() == null && binaryTree.getRight() == null; //Si el nodo no tiene hijos
     }
 
-    public static boolean perfect(IBinaryTree binaryTree) {
+    public static boolean perfect(IBinaryTree binaryTree) { //Devuelve true si arbol binario es perfecto, es decir, todos los niveles están completamente llenos y todas las hojas están en el mismo nivel.
         if (binaryTree == null || binaryTree.isEmpty()) {
             return true;
         }
@@ -140,7 +140,7 @@ public class BinaryTreeAlgorithms {
         return perfect(binaryTree.getLeft()) && perfect(binaryTree.getRight());
     }
 
-    private static boolean existsLT(IBinaryTree binaryTree, int value) {
+    private static boolean existsLT(IBinaryTree binaryTree, int value) {// Devuelve true si hay algun nodo menor al valor dado
         if (binaryTree == null || binaryTree.isEmpty()) {
             return false;
         }
@@ -150,7 +150,7 @@ public class BinaryTreeAlgorithms {
         return existsLT(binaryTree.getLeft(), value) || existsLT(binaryTree.getRight(), value);
     }
 
-    private static boolean existsGT(IBinaryTree binaryTree, int value) {
+    private static boolean existsGT(IBinaryTree binaryTree, int value) {// Devuelve true si hay algun valor mayor al dado
         if (binaryTree == null || binaryTree.isEmpty()) {
             return false;
         }
@@ -160,7 +160,7 @@ public class BinaryTreeAlgorithms {
         return existsGT(binaryTree.getLeft(), value) || existsGT(binaryTree.getRight(), value);
     }
 
-    private static boolean isSBT(IBinaryTree binaryTree) {
+    private static boolean isSBT(IBinaryTree binaryTree) {//Devuelve True si el arbol binario es un arbol binario de busqueda
         if (binaryTree == null || binaryTree.isEmpty()) {
             return true;
         }
