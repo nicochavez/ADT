@@ -19,8 +19,6 @@ public class BynareeTreeExercises {
         binaryTreeToQueue(binaryTree.getRight(), queue);
     }
 
-    public static IPriorityQueue queueToPriorityQueue(IQueue queue){
-        while
-    }
+
 
 }
