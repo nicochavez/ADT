@@ -5,67 +5,74 @@ import org.adt.core.adt.definition.IBinaryTree;
 
 public class BinaryTreeAlgorithms {
 
-    public static void inOrder(IBinaryTree binaryTree) {
+    public static void inOrder(IBinaryTree binaryTree) { //recorre el arbol
+        if (binaryTree == null || binaryTree.isEmpty()) { // Comprueba si el árbol binario (binaryTree) es nulo o está vacío
+            return;
+        }
+
+        inOrder(binaryTree.getLeft()); //recorre el subarbol izquierdo
+        System.out.println(binaryTree.getValue()); //imprime el nodo actual
+        inOrder(binaryTree.getRight()); //recorre el subarbol derecho
+    }// En resumen: visita primero el nodo izquierdo, luego el nodo raíz y finalmente el nodo derecho.
+
+    public static void preOrder(IBinaryTree binaryTree) { 
         if (binaryTree == null || binaryTree.isEmpty()) {
             return;
         }
 
-        inOrder(binaryTree.getLeft());
         System.out.println(binaryTree.getValue());
-        inOrder(binaryTree.getRight());
-    }
-
-    public static void preOrder(IBinaryTree binaryTree) {
-        if (binaryTree == null || binaryTree.isEmpty()) {
-            return;
-        }
-
-        System.out.println(binaryTree.getValue());
-        inOrder(binaryTree.getLeft());
-        inOrder(binaryTree.getRight());
-    }
+        preOrder(binaryTree.getLeft());
+        preOrder(binaryTree.getRight());
+    } //visita primero al nodo raiz, luego al nodo izquierdo y finalmente al derecho.
 
     public static void postOrder(IBinaryTree binaryTree) {
         if (binaryTree == null || binaryTree.isEmpty()) {
             return;
         }
 
-        inOrder(binaryTree.getLeft());
-        inOrder(binaryTree.getRight());
+        postOrder(binaryTree.getLeft());
+        postOrder(binaryTree.getRight());
         System.out.println(binaryTree.getValue());
-    }
+    }//visita primero al nodo izquierdo, luego al nodo derecho y finalmente a la raiz.
 
-    public static int weight(IBinaryTree binaryTree) {
+    public static int weight(IBinaryTree binaryTree) { //devuelve la cantidad de nodos que tiene un arbol
         if (binaryTree == null || binaryTree.isEmpty()) {
             return 0;
         }
-        return 1 + weight(binaryTree.getLeft()) + weight(binaryTree.getRight());
+        return 1 + weight(binaryTree.getLeft()) + weight(binaryTree.getRight()); 
     }
 
-    public static int height(IBinaryTree binaryTree) {
+    public static int sumNodes(IBinaryTree binaryTree){ //Suma todos los nodos internos del arbol
+        if (binaryTree == null || binaryTree.isEmpty()) {
+            return 0;
+        }
+        return binaryTree.getValue() + sumNodes(binaryTree.getLeft()) + sumNodes(binaryTree.getRight());
+    }
+
+    public static int height(IBinaryTree binaryTree) {//Obtiene la altura del arbol, el camino desde la raiz hasta el nodo del ultimo nivel
         if (binaryTree == null || binaryTree.isEmpty()) {
             return 0;
         }
         return 1 + Math.max(height(binaryTree.getLeft()), height(binaryTree.getRight()));
     }
 
-    public static int order(IBinaryTree binaryTree, int element) {
+    public static int order(IBinaryTree binaryTree, int element) { //devuelve la cantidad de hijos de un nodo
         if (binaryTree == null || binaryTree.isEmpty()) {
             return -1;
         }
-        if (binaryTree.getValue() == element) {
-            int hasLeft = binaryTree.getLeft() == null ? 0 : 1;
-            int hasRight = binaryTree.getRight() == null ? 0 : 1;
-            return hasLeft + hasRight;
+        if (binaryTree.getValue() == element) { //si el valor del nodo coincide con el elemento buscado
+            int hasLeft = binaryTree.getLeft() == null ? 0 : 1; //si tiene un hijo izquierod hasLeft = 1
+            int hasRight = binaryTree.getRight() == null ? 0 : 1;//si tiene un hijo derecho hasRight = 1
+            return hasLeft + hasRight; //retorna la suma de hasLeft y HasRight
         }
-        int candidate = order(binaryTree.getLeft(), element);
-        if (candidate == -1) {
-            return order(binaryTree.getRight(), element);
+        int candidate = order(binaryTree.getLeft(), element); //verifica que el nodo se encuentr en el subarbol isquierdo
+        if (candidate == -1) { //si no lo esta
+            return order(binaryTree.getRight(), element); //busca en el subarbol derecho
         }
         return candidate;
     }
 
-    public static boolean skewed(IBinaryTree binaryTree) {
+    public static boolean skewed(IBinaryTree binaryTree) { //
         return leftSkewed(binaryTree) || rightSkewed(binaryTree);
     }
 

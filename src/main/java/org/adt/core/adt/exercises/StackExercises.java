@@ -3,6 +3,7 @@ package org.adt.core.adt.exercises;
 import org.adt.core.adt.definition.ISet;
 import org.adt.core.adt.definition.IStack;
 import org.adt.core.adt.implementation.dynamic.Stack;
+import org.adt.core.adt.implementation.normal.Set;
 import org.adt.core.adt.algorithms.StackAlgorithms;
 
 public class StackExercises {
@@ -104,6 +105,7 @@ public class StackExercises {
             }
             stack.remove();
         }
+        return set;
     }
 
     public static IStack[] splitStack(IStack stack){
@@ -123,8 +125,10 @@ public class StackExercises {
                 stack2.add(stack.getTop());
             }
         }
-        stackArray[0] = StackAlgorithms.revert(stack1);
-        stackArray[1] = StackAlgorithms.revert(stack2);
+        StackAlgorithms.revert(stack1);
+        StackAlgorithms.revert(stack2);
+        stackArray[0] = stack1;
+        stackArray[1] = stack2;
         return stackArray;
     }
 

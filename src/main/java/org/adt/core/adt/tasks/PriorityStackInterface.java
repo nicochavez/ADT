@@ -1,4 +1,4 @@
-package org.example.Ej1;
+package org.adt.core.adt.tasks;
 
 public interface PriorityStackInterface {
 

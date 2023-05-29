@@ -1,6 +1,3 @@
-
-
-/*
  package org.adt.core.adt.tasks;
 
 import org.adt.core.adt.algorithms.BinaryTreeAlgorithms;
@@ -72,7 +69,7 @@ public class Task02 {
 
     }
 
- */
+}
 
 
 /*
