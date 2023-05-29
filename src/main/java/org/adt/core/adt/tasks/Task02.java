@@ -66,8 +66,8 @@ public class Task02 {
         }
         System.out.println("---");
          */
-
-        return buildBST (values, 0, values.size() - 1);
+        int size = values.size()-1;
+        return buildBST (values, 0, size);
     }
     
     private static void inOrderTraversal(IBinaryTree binaryTree, List<Integer> values) {
@@ -76,17 +76,17 @@ public class Task02 {
         }
     
         inOrderTraversal(binaryTree.getLeft(), values);
-        System.out.println(binaryTree.getValue());
         values.add(binaryTree.getValue());
         inOrderTraversal(binaryTree.getRight(), values);
     }
     
-    public IBinaryTree buildBST(List<Integer> values, int start, int end) {
+    public static IBinaryTree buildBST(List<Integer> values, int start, int end) {
         if (start > end) {
             return null;
         }
         
-        int mid = start + (end - start) / 2;
+        int mid = (start + end) / 2;
+        System.out.println(mid);
         IBinaryTree root = new BinaryTree();
         root.create(values.get(mid));
         root.addLeft(buildBST(values, start, mid - 1).getValue());
